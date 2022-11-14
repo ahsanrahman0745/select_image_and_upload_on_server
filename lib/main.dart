@@ -68,14 +68,18 @@ class _MyHomePageState extends State<MyHomePage> {
     var request = http.MultipartRequest("POST", url);
     request.files.add(await http.MultipartFile.fromBytes('blog_images', selectFile!,
     contentType: MediaType('application', 'json'), filename: 'blog_images'));
-    request.fields.addAll({'ahsan':'data'});
-    request.send().then((responce) => {
-      if(responce.statusCode==200){
-        print("File Upload Successfully $responce")
-      }else{
-    print("File Upload Successfully")
+    request.fields['ahsan']='888';
+    request.fields[{'ahsan2':'datawsa'}];
+    request.fields.addAll({'ahsan24':'44'});
+    var response = await request.send();
+    if(response.statusCode == 200) {
+      var responseData = await response.stream.toBytes();
+      var responseToString = String.fromCharCodes(responseData);
+      var jsonBody = jsonDecode(responseToString);
+      setState(() {
+        print(jsonBody);
+      });
     }
-    });
 
 
   }
