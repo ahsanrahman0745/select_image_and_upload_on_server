@@ -68,6 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
     var request = http.MultipartRequest("POST", url);
     request.files.add(await http.MultipartFile.fromBytes('blog_images', selectFile!,
     contentType: MediaType('application', 'json'), filename: 'blog_images'));
+    request.fields.addAll({'ahsan':'data'});
     request.send().then((responce) => {
       if(responce.statusCode==200){
         print("File Upload Successfully $responce")
@@ -85,7 +86,7 @@ class _MyHomePageState extends State<MyHomePage> {
       child: Column(children: [
         bytesData!=null? Image.memory(bytesData!,width: 200,height: 200,)
             :
-        Image.network("http://localhost:3000/blog/blog_images_1668429287896.jpeg",width: 100,height: 100,),
+        Image.network("http://localhost:3000/blog/blog_images_1668429576915",width: 100,height: 100,),
         ElevatedButton(onPressed: (){
           startPackingImageFile();
         }, child: Text("select")),
